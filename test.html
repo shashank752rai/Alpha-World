@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Quiz for Kids</title>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', sans-serif;
+            background-color: #f0f8ff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            background-image: url('abcd.avif');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+
+        }
+        .quiz-container {
+            width: 50%;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            padding: 25px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .question {
+            font-size: 1.4em;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #4CAF50;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .option {
+            width: 220px;
+            padding: 12px 25px;
+            background-color: #007bff;
+            color: white;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .option:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+
+        .option.correct {
+            background-color: #28a745;
+            /* Green */
+        }
+
+        .option.incorrect {
+            background-color: #dc3545;
+            /* Red */
+        }
+
+        .next-btn {
+            margin-top: 20px;
+            padding: 12px 30px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 1.2em;
+            display: none;
+        }
+
+        .certificate-btn {
+            margin-top: 20px;
+            padding: 12px 30px;
+            background-color: #ffcc00;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 1.5em;
+            display: none;
+        }
+
+        .music-controls {
+            margin-top: 20px;
+        }
+
+        .music-btn {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+        }
+
+        .timer {
+            margin-top: 20px;
+            font-size: 1.2em;
+            color: #dc3545;
+            font-weight: bold;
+        }
+
+        .progress-bar {
+            position: absolute;
+            top: 10px;
+            left: 0;
+            height: 10px;
+            width: 0;
+            background-color: #4CAF50;
+        }
+        @media(max-width:480px){
+            .quiz-container{
+                width: 75vw;
+            }
+            .certificate-btn{
+                width:75vw;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="quiz-container">
+        <div class="progress-bar" id="progress-bar"></div>
+        <div id="question-container">
+            <div class="question" id="question">Question goes here</div>
+            <div class="options" id="options"></div>
+            <button class="next-btn" id="next-btn" onclick="loadNextQuestion()">Next</button>
+        </div>
+        <button class="certificate-btn" id="certificate-btn" onclick="generateCertificate()">Generate Your
+            Certificate</button>
+        <div class="timer" id="timer">Time left: 15 seconds</div>
+    </div>
+
+    <div class="music-controls">
+        <button id="music-btn" class="music-btn" onclick="toggleMusic()">Play Music</button>
+    </div>
+
+    <audio id="background-music" loop>
+        <source src="music1.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <script>
+        const questions = [
+            { question: "What is the last letter in the alphabet?", options: ["Z", "Y", "X", "W"], answer: "Z" },
+            { question: "What comes after S?", options: ["U", "R", "T", "P"], answer: "T" },
+            { question: "What comes after P?", options: ["O", "Q", "N", "M"], answer: "Q" },
+            { question: "What comes after D?", options: ["E", "F", "C", "G"], answer: "E" },
+            // { question: "What comes after Y?", options: ["W", "X", "Z", "V"], answer: "Z" },
+            // { question: "What comes after C?", options: ["B", "D", "E", "F"], answer: "D" },
+            // { question: "What comes before T?", options: ["S", "U", "V", "W"], answer: "S" },
+            // { question: "What comes before W?", options: ["X", "U", "T", "V"], answer: "V" },
+            // { question: "Twinkle, Twinkle, Little Star, How I wonder what you ___?", options: ["are", "do", "see", "say"], answer: "are" },
+            // { question: "Johny Johny, Yes Papa, Eating sugar? No Papa, Telling lies? ___ Papa", options: ["Yes", "No", "Stop", "Don't"], answer: "No" },
+            // { question: "Five little monkeys swinging in the tree, Teasing Mr. Crocodile: You can't catch me, You can't catch me! What happened next?", options: ["He shouted", "He jumped", "One fell down", "He ate them"], answer: "One fell down" },
+            // { question: "Five little ducks went out one day, Over the hills and far away, Mother duck said, 'Quack, quack, quack, quack'. How many came back?", options: ["One", "Two", "All", "None"], answer: "None" },
+            // { question: "Rain, rain, go away, Come again another day. Little Johnny wants to ___?", options: ["Play", "Sleep", "Dance", "Eat"], answer: "Play" },
+            // { question: "Twinkle, twinkle, little star, How I wonder what you are. Up above the world so high, Like a diamond in the ___?", options: ["Sea", "Night", "Sky", "Sun"], answer: "Sky" },
+            // { question: "Johny Johny, Yes Papa, Eating sugar? Yes Papa, Telling lies? Yes Papa, Open your mouth, Ha Ha Ha!", options: ["Yes", "No", "Maybe", "Stop"], answer: "Yes" },
+            // { question: "Five little ducks went swimming one day, Over the hills and far away, Mother duck said, 'Quack, quack, quack, quack'. How many little ducks went swimming?", options: ["One", "Five", "All", "None"], answer: "Five" },
+            // { question: "Five little monkeys jumping on the bed, One fell off and bumped his head. How many monkeys are left?", options: ["Two", "Three", "Four", "One"], answer: "Four" },
+            // { question: "Johny Johny, Yes Papa, Eating sugar? No Papa, Telling lies? No Papa, Open your mouth, Ha Ha Ha!", options: ["Yes", "No", "Maybe", "Stop"], answer: "No" },
+            // { question: "What is the first letter of the word 'Apple'?", options: ["A", "B", "C", "D"], answer: "A" },
+            // { question: "What is the last letter of the word 'Orange'?", options: ["R", "A", "O", "E"], answer: "E" },
+            // { question: "Which letter comes after 'C' in the alphabet?", options: ["B", "D", "E", "F"], answer: "D" },
+        ];
+
+        let currentQuestionIndex = 0;
+    let score = 0;
+    let timer;
+    const questionElement = document.getElementById("question");
+    const optionsElement = document.getElementById("options");
+    const nextButton = document.getElementById("next-btn");
+    const certificateButton = document.getElementById("certificate-btn");
+    const timerElement = document.getElementById("timer");
+    const progressBar = document.getElementById("progress-bar");
+    const musicButton = document.getElementById("music-btn");
+    const backgroundMusic = document.getElementById("background-music");
+    let isMusicPlaying = false;
+
+    function loadQuestion() {
+        const questionData = questions[currentQuestionIndex];
+        questionElement.textContent = `${currentQuestionIndex + 1}/${questions.length} ${questionData.question}`;
+        optionsElement.innerHTML = "";
+        nextButton.style.display = "none"; // Hide next button initially
+
+        questionData.options.forEach(option => {
+            const button = document.createElement("button");
+            button.textContent = option;
+            button.classList.add("option");
+            button.onclick = () => checkAnswer(button, questionData.answer);
+            optionsElement.appendChild(button);
+        });
+
+        startTimer();
+        updateProgressBar();
+    }
+
+    function checkAnswer(selectedOption, correctAnswer) {
+        clearInterval(timer);
+        const options = document.querySelectorAll(".option");
+        options.forEach(option => {
+            option.disabled = true; // Disable all options after answering
+            if (option.textContent === correctAnswer) {
+                option.classList.add("correct");
+            } else if (option === selectedOption) {
+                option.classList.add("incorrect");
+            }
+        });
+
+        if (selectedOption && selectedOption.textContent === correctAnswer) {
+            score++;
+        }
+
+        if (currentQuestionIndex === questions.length - 1) {
+            if (score === questions.length) {
+                certificateButton.style.display = "block";
+            } else {
+                alert("Not all answers are correct. Please try again!");
+            }
+            nextButton.style.display = "none"; // Hide the next button
+        } else {
+            nextButton.style.display = "block";
+            nextButton.textContent = "Next";
+            nextButton.onclick = loadNextQuestion;
+        }
+    }
+
+    function loadNextQuestion() {
+        currentQuestionIndex++;
+        if (currentQuestionIndex < questions.length) {
+            loadQuestion();
+        }
+    }
+
+    function generateCertificate() {
+        if (score === questions.length) {
+            // Redirect to the certificate page
+            window.location.href = 'certificate.html';
+        } else {
+            alert("You need to answer all questions correctly to generate the certificate.");
+        }
+    }
+
+    function startTimer() {
+        let timeLeft = 15;
+        timerElement.textContent = `Time left: ${timeLeft} seconds`;
+        timer = setInterval(() => {
+            timeLeft--;
+            timerElement.textContent = `Time left: ${timeLeft} seconds`;
+            if (timeLeft <= 0) {
+                clearInterval(timer);
+                showTimeUpNext();
+            }
+        }, 1000);
+    }
+
+    function showTimeUpNext() {
+        nextButton.textContent = "Time's Up Next";
+        nextButton.style.display = "block"; // Show the next button
+        nextButton.onclick = loadNextQuestion; // Proceed to next question after click
+        disableOptions(); // Disable options after time's up
+    }
+
+    function disableOptions() {
+        const options = document.querySelectorAll(".option");
+        options.forEach(option => {
+            option.disabled = true;
+        });
+    }
+
+    function updateProgressBar() {
+        const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
+        progressBar.style.width = `${progress}%`;
+    }
+
+    function toggleMusic() {
+        if (isMusicPlaying) {
+            backgroundMusic.pause();
+            musicButton.textContent = "Play Music";
+        } else {
+            backgroundMusic.play();
+            musicButton.textContent = "Pause Music";
+        }
+        isMusicPlaying = !isMusicPlaying;
+    }
+
+    window.onload = () => {
+        loadQuestion();
+        backgroundMusic.play().catch(() => {
+            console.log("Auto-play failed due to browser restrictions.");
+        });
+        isMusicPlaying = true;
+        musicButton.textContent = "Pause Music"; // Update button to reflect current state
+    };
+    </script>
+
+</body>
+
+</html>

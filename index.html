@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ALPHA-WORLD</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">  
+  <link rel="stylesheet" href="mainstyle.css">
+</head>
+
+<body>
+  <header class="h7">
+    <nav>
+      <div class="logo">ALPHA-WORLD</div>
+      <ul class="nav-links">
+        <li><a href="#home" class="home">Home</a></li>
+        <li><a href="#About us">About us</a></li>
+        <li><a href="#Let's Explore" class="Let">Let's Explore</a></li>
+        <li><a href="#Testimonial" class="testi">Testimonial</a></li>
+        <li><a href="#Contact us" class="Contact">Contact us</a></li>
+      </ul>
+      <div id="user-info" style="font-weight: bold; margin-right: -80px; display: none; 
+      border: 2px solid #88f9a8;font-size: 18px;
+      padding: 6px;border-radius: 10px; background-color: #7df77d; width: 53vw;
+    position: relative;
+    left: -100px;
+    top: -5px;
+    font-size: 28px !important;"></div>
+      <button class="login-btn" id="auth-btn" onclick="handleAuth()">Login</button>
+    </nav>
+  </header>
+  <main>
+    <section class="hero" id="home">
+      <h1>THE</h1>
+      <h2>ALPHA-WORLD</h2>
+      <div>
+        <img src="img1-Bsh5S3Mq.png" class="img1">
+      </div>
+      <p>"IT'S PLATFORM FOR SUCCESS" </p>
+      <img src="img3.png--4mkAUZA.png" class="img2">
+      <div class="container">
+        <div class="head" id="About us"> Personalised learning </div>
+        <div class="content">Personalized learning is an adaptable educational approach that recognizes that every child
+          learns differently.
+          It goes beyond a one-size-fits-all model and aims to meet individual students where they are.</div>
+        <img src="img5-CdqYU_-E.png" alt="kid" class="img3">
+        <div class="h2">
+          Knowledge
+        </div>
+        <div class="c2">
+          We provide the best of work and provide with various concept that help to gain knowledge And some quizes to
+          interact
+        </div>
+        <img src="img4.png" alt="tree" class="img4">
+        <div class="h3">
+          Creativity
+        </div>
+        <div class="c3">
+          Creativity is a magical spark that ignites a child's imagination, curiosity, and joy. For kindergarteners,
+          this creative flame burns brightly, and as educators and parents, we have the delightful task of fanning it
+          into a lifelong passion. Let's explore how to nurture creativity in kindergarten kids.
+        </div>
+        <img src="img6.png" alt="creativity" class="img6">
+        <div class="h4" id="Let's Explore">Let's Explore</div>
+        <div class="card-container">
+          <div class="card1">
+            <img src="img7.png" alt="abc" class="img7">
+            <div class="card-content">Let's explore the essential components of teaching the alphabet (ABCs) to
+              kindergarten kids. Alphabet knowledge is a foundational skill that lays the groundwork for future reading
+              success</div>
+            <button class="b1" onclick="redirectToPage('abc.html')">Let's Go</button>
+
+          </div>
+          <div class="card2">
+            <img src="img8.png" alt="abc" class="img8"> <!-- Use the same image style -->
+            <div class="card-content">Let's explore the essential components of teaching poetry to kindergarten kids. By
+              breaking down the elements of poems, we appreciate the beauty of rhythm, and imagination</div>
+            <button class="b2" onclick="redirectToPage('poem.html')">Let's Go</button>
+
+          </div>
+        </div>
+        <div class="card3" id="Testimonial">
+          <img src="test.png" alt="science" class="img9" style="width: 43vh;">
+          <div class="card-content"> Take a fun and interactive test to showcase your knowledge. Earn a certificate to
+            celebrate your success and share your achievement!</div>
+          <button class="b3" onclick="redirectToPage('test.html')">Let's Go</button>
+        </div>
+        <div class="h8">
+          Stay Motivated
+        </div>
+        <div class="c8">
+          Keeping kindergarten kids motivated is essential for their overall development and love for learning. As
+          parents, caregivers, and educators, we can use science-based approaches to encourage positive motivation.
+        </div>
+        <img src="img31.png" alt="creativity" class="img31">
+      </div>
+      </div>
+    </section>
+  </main>
+  <footer id="Contact us">
+    <div class="footer-container">
+      <div class="footer-about">
+        <h3>About Alpha World</h3>
+        <p>Alpha World is your child’s gateway to interactive, fun, and foundational learning. Our mission is to nurture curiosity and inspire a lifelong love of learning in every child.</p>
+      </div>
+      <div class="footer-contact">
+        <h3>Contact Us</h3>
+        <p>📧 Email: <a href="mailto:support@alphaworld.com">support@alphaworld.com</a></p>
+        <p>📞 Phone: +123 456 7890</p>
+        <p>🏠 Address: 123 Learning Lane, Imagination City, EduLand</p>
+      </div>
+      <div class="footer-follow">
+        <h3 class="Follow">Follow Us</h3>
+        <ul>
+          <li><a href="#" target="_blank"><i class="fab fa-facebook"></i> Facebook</a></li>
+          <li><a href="#" target="_blank"><i class="fab fa-twitter"></i> Twitter</a></li>
+          <li><a href="#" target="_blank"><i class="fab fa-instagram"></i> Instagram</a></li>
+          <li><a href="https://www.linkedin.com/in/shubham-shukla-42b412308" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>Alpha World provides child-friendly resources and learning materials, constantly updated to maintain accuracy. However, we cannot guarantee complete correctness. By using Alpha World, you agree to our terms of use, privacy, and cookie policies.</p>
+      <p>© 2024 Alpha World. All Rights Reserved.</p>
+    </div>
+  </footer>  
+  <script src="script.js"></script>
+</body>
+
+</html>

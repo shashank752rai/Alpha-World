@@ -1,0 +1,43 @@
+/* Add these new animation classes at the end of your existing CSS */
+
+/* Initial states for animated elements */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.animate-on-scroll.from-left {
+  transform: translateX(-100px);
+}
+
+.animate-on-scroll.from-right {
+  transform: translateX(100px);
+}
+
+/* Animated state */
+.animate-on-scroll.visible {
+  opacity: 1;
+  transform: translate(0);
+}
+
+/* Responsive adjustments for animations */
+@media (max-width: 768px) {
+  .animate-on-scroll {
+    transform: translateY(20px);
+  }
+  
+  .animate-on-scroll.from-left,
+  .animate-on-scroll.from-right {
+    transform: translateY(20px);
+  }
+}
+
+/* Disable animations on devices that prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .animate-on-scroll {
+    transition: none;
+    opacity: 1;
+    transform: none;
+  }
+}

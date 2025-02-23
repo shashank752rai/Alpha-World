@@ -1,0 +1,370 @@
+/* General Styling */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #d5f7d5;
+  /* Light green background */
+  /* display: flex; */
+  /* flex-direction: column; Align elements vertically */
+  /* justify-content: flex-start; Align content at the top */
+  /* align-items: center; */
+  /* min-height: 170vh; Set the body height to 150% of the viewport height */
+  /* overflow-x: hidden; Remove horizontal scrollbar */
+  /* overflow-y: auto; Allow vertical scrolling */
+  /* height: auto; Allow height to adjust based on content */
+}
+
+/* Heading Styling */
+h1 {
+  border: 2px solid #7df77d;
+  padding: 20px;
+  background-color: #7df77d;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 3rem;
+  font-weight: bold;
+  color: white;
+  /* A fresh green color */
+  text-align: center;
+  /* margin-top: 20px; */
+  /* margin-bottom: 30px; Space between heading and card container */
+}
+
+/* Card Container */
+.card-container {
+  display: flex;
+  justify-content: center;
+  gap: 10%;
+  flex-wrap: wrap;
+  /* margin-top: 20px; */
+  /* height: auto; */
+  /* Let it adjust based on the content */
+  /* max-height: 60px; */
+  /* Set a minimum height for the card container */
+  width: 100%;
+  row-gap: 10vh;
+  /* Ensure it takes up the full width of the viewport */
+  background-color: #d9ffd9;
+  position: relative;
+  /* left: 240px; */
+}
+
+.card1 img,
+.card2 img,
+.card3 img,
+.card4 img,
+.card5 img {
+  width: 85%;
+  height: 40%;
+  margin-top: 10px;
+  border: 2px solid rgb(13, 201, 94);
+  border-radius: 40px;
+  padding: 10px;
+}
+
+/* Card Content */
+.card-content {
+  text-align: center;
+  font-weight: 500;
+  margin: 10% 2%;
+  font-size: medium;
+}
+
+/* Buttons */
+.b1,
+.b2,
+.b3,
+.b4,
+.b5 {
+  background-color: #7df77d;
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 10px 30px;
+  border-radius: 12px;
+  /* margin-top: 20px; */
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.b4 {
+  position: relative;
+  /* top: 30px; */
+}
+
+.b3 {
+  position: relative;
+  /* top: 20px; */
+}
+
+.b1:hover,
+.b2:hover,
+.b3:hover,
+.b4:hover,
+.b5:hover {
+  background-color: white;
+  color: #13a813;
+}
+
+/* Card Styling */
+.card1,
+.card2,
+.card3,
+.card4,
+.card5 {
+  /* width: 45vh;
+  height: 60vh;
+  background-color: white;
+  border: 2px solid #d9ffd9;
+  border-radius: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  opacity: 0; /* Initially hidden */
+  /* transform: translateX(100%); Positioned off-screen */
+  width: 40vmin;
+  /* height: 450px; */
+  background-color: white;
+  border: 2px solid #d9ffd9;
+  border-radius: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0%;
+  opacity: 0;
+  transform: translateX(100%);
+  height: 70vmin;
+}
+
+
+/* Animations */
+.tornado-left {
+  animation: tornadoFromLeft 1.5s ease-out forwards;
+}
+
+.tornado-right {
+  animation: tornadoFromRight 1.5s ease-out forwards;
+}
+
+@keyframes tornadoFromLeft {
+  0% {
+    transform: translateX(-100%) rotateY(0deg);
+    opacity: 0;
+  }
+
+  50% {
+    transform: translateX(-50%) rotateY(180deg);
+    opacity: 0.5;
+  }
+
+  100% {
+    transform: translateX(0) rotateY(360deg);
+    opacity: 1;
+  }
+}
+
+@keyframes tornadoFromRight {
+  0% {
+    transform: translateX(100%) rotateY(0deg);
+    opacity: 0;
+  }
+
+  50% {
+    transform: translateX(50%) rotateY(180deg);
+    opacity: 0.5;
+  }
+
+  100% {
+    transform: translateX(0) rotateY(360deg);
+    opacity: 1;
+  }
+}
+/* 
+.card1 {
+  width: 35vh;
+  height: 65vh;
+}
+
+.card2 {
+  width: 35vh;
+  height: 65vh;
+}
+
+.card3 {
+  width: 35vh;
+  height: 65vh;
+}
+
+.card4 {
+  width: 34vh;
+  height: 68vh;
+  margin-left: 70px;
+  margin-right: 30px;
+  gap: 20px;
+  position: relative;
+  top: 538px;
+  right: 640px;
+}
+
+.card5 {
+  width: 35vh;
+  height: 68vh;
+  margin-right: 90px;
+  position: relative;
+  right: 383px;
+  top: -68px;
+} */
+
+@media(max-width:480px) {
+  h1 {
+    width: 220vw;
+    margin: 0px;
+    position: relative;
+    left: 630px;
+    font-size: 110px;
+  }
+
+  .card-container {
+    position: relative;
+    left: 590px;
+    top: 100px;
+  }
+
+  .card5 {
+    position: relative;
+    left: 70px;
+    bottom: 1204px;
+    height: auto;
+    top: -2000px;
+    width: 140vw;
+  }
+
+  .card1 {
+    position: relative;
+    right: 333px;
+    height: auto;
+    width: 200vw;
+  }
+
+  .card2 {
+    position: relative;
+    left: 349px;
+    bottom: 1068px;
+    height: 117vh;
+    width: 149vw;
+  }
+
+  .card3 {
+    position: relative;
+    right: 327px;
+    bottom: 960px;
+    height: auto;
+    width: 140vw;
+  }
+
+  .card4 {
+    position: relative;
+    left: 330px;
+    bottom: 1077px;
+    height: 54vh;
+    top: -2064px;
+    height: 122vh;
+    width: 140vw;
+  }
+
+  .b4 {
+    margin-top: -10px;
+    position: relative;
+    top: 16px;
+    font-size: 85px;
+    border-radius: 40px;
+  }
+
+  .b3 {
+    margin-top: 37px;
+    position: relative;
+    top: 7px;
+    font-size: 85px;
+    border-radius: 40px;
+
+  }
+
+  .b2 {
+    position: relative;
+    top: 3px;
+    font-size: 85px;
+    border-radius: 40px;
+  }
+
+  .b1 {
+    font-size: 85px;
+    position: relative;
+    top: 7px;
+    border-radius: 40px;
+  }
+
+  .b5 {
+    font-size: 85px;
+    border-radius: 40px;
+    position: relative;
+    top: -5px;
+  }
+
+  .card1 .card-content {
+    font-size: 50px;
+    width: 130vw;
+  }
+
+  .card1 img {
+    width: 123vw;
+    height: 42vh;
+  }
+
+  .card2 .card-content {
+    font-size: 50px;
+    width: 117vw;
+  }
+
+  .card2 img {
+    width: 123vw;
+    height: 42vh;
+  }
+
+
+  .card3 .card-content {
+    font-size: 50px;
+    width: 117vw;
+  }
+
+  .card3 img {
+    width: 123vw;
+    height: 42vh;
+  }
+
+  .card4 .card-content {
+    font-size: 50px;
+    width: 105vw;
+  }
+
+  .card4 img {
+    width: 123vw;
+    height: 42vh;
+  }
+
+  .card5 .card-content {
+    font-size: 50px;
+    width: 142vw;
+  }
+
+  .card5 img {
+    width: 123vw;
+    height: 42vh;
+  }
+
+  body {
+    height: 96vh;
+    margin: 10px 5px;
+  }
+}

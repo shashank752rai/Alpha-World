@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alphabet Cards</title>
+  <style>
+    /* Scrollbar customization */
+    ::-webkit-scrollbar {
+      width: 12px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background-color: #4caf50;
+      border-radius: 10px;
+      border: 3px solid #97a2ff;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #f3f4f6;
+      border-radius: 10px;
+    }
+  
+
+    /* General body styling */
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      margin: 0;
+      padding: 20px;
+      background-color: #97a2ff;
+    }
+
+    h1 {
+      text-align: center;
+      margin-top: -20px;
+      margin-bottom: 20px;
+      font-size: 4.5rem;
+      color: white;
+      position: sticky;
+      top: 0;
+      z-index: 1;
+      background-color: #4eeb66;
+      margin-left: -20px;
+      width: 99vw;
+    }
+
+    .image-container img,
+    .image2-container img {
+      position: sticky;
+      top: 100px;
+      z-index: 1;
+      width: 100%;
+      height: auto;
+    }
+
+    .image2-container img {
+      margin-left: 875px;
+    }
+
+    .content {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      width: 100%;
+    }
+
+    .image-container {
+      width: 20%;
+      margin-right: 20px;
+    }
+
+    .image2-container {
+      width: 20%;
+      margin-right: 20px;
+    }
+
+    .card-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      max-width: 800px;
+      width: 100%;
+      margin-left: -287px;
+    }
+
+    .card-wrapper {
+      text-align: center;
+    }
+    .card-wrapper.y {
+      grid-column: 2 / 3; /* Center under the middle column */
+      grid-row: 2; /* Below the first row */
+    }
+
+    .card-wrapper.z {
+      grid-column: 3 / 4; /* Right below the third column */
+      grid-row: 2; /* Below the first row */
+    }
+    .card {
+      perspective: 1000px;
+      position: relative;
+      width: 200px;
+      height: 250px;
+      margin: 0 auto;
+    }
+
+    .card-inner {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      transform-style: preserve-3d;
+      transition: transform 0.6s;
+    }
+
+    .card-inner.is-flipped {
+      transform: rotateY(180deg);
+    }
+
+    .card-front,
+    .card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .card-front {
+      background: #b1ffbd;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10rem;
+      font-weight: bold;
+      color: #ae83f5;
+    }
+
+    .card-back {
+      background: #4caf50;
+      transform: rotateY(180deg);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      padding: 10px;
+      box-sizing: border-box;
+    }
+
+    .card-back img {
+      max-width: 90%;
+      max-height: 70%;
+      border-radius: 10px;
+    }
+
+    .card-back-text {
+      margin-top: 10px;
+      font-size: 1.6rem;
+      color: white;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    .speaker img {
+      width: 50px;
+    height: 55px;
+    cursor: pointer;
+    border: 2px solid black;
+    border-radius: 104px;
+    padding: 3px;
+    background-color: white;
+    }
+
+    .speaker img:hover {
+      filter: brightness(1.2);
+    }
+    @media(max-width:480px){
+      .card-container{
+        position: relative;
+        left: 280px;
+      }
+      h1{
+        width: 293vw;
+        height: 20vh;
+        margin-left: -16px;
+        margin-right: 0px;
+        position: sticky;
+        right: 18px;
+        font-size: 125px;
+      }
+      .image-container img{
+        width: 60vw;
+        display: none;
+      }
+      .image2-container{
+        width: 51vw;
+        display: none;
+      }
+      .card-front{
+        font-size: 300px;
+      }
+      .card{
+        width: 70vw;
+        height: 40vh;
+      }
+      .speaker img{
+        width: 25vw;
+        height: 12vh;
+      }
+      .speaker{
+        height: 15vh;
+        width: 80vw;
+      }
+      .card-back p{
+        font-size: 40px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Alphabet Cards</h1>
+  <div class="content">
+    <div class="image-container">
+      <img src="limg.png" alt="Placeholder Image" style="height:80vh;" class="img1">
+    </div>
+    <div class="image2-container">
+      <img src="img5-CdqYU_-E.png" alt="Placeholder Image" style="height:60vh;" class="img2">
+    </div>
+    <div class="card-container" id="cardContainer"></div>
+  </div>
+  <script>
+    const data = [
+      { letter: "A", word: "A for Apple", image: "a.png" },
+      { letter: "B", word: "B for Banana", image: "b.png" },
+      { letter: "C", word: "C for Cat", image: "c.png" },
+      { letter: "D", word: "D for Dog", image: "d.png" },
+      { letter: "E", word: "E for Elephant", image: "e.png" },
+      { letter: "F", word: "F for Fish", image: "f.png" },
+      { letter: "G", word: "G for Grapes", image: "g.png" },
+      { letter: "H", word: "H for Hen", image: "h.png" },
+      { letter: "I", word: "I for Ice Cream", image: "i.png" },
+      { letter: "J", word: "J for Jaguar", image: "j.png" },
+      { letter: "K", word: "K for King", image: "k.png" },
+      { letter: "L", word: "L for Lion", image: "L.png" },
+      { letter: "M", word: "M for Mango", image: "m.png" },
+      { letter: "N", word: "N for Nest", image: "n.png" },
+      { letter: "O", word: "O for Orange", image: "o.png" },
+      { letter: "P", word: "P for Parrot", image: "p.png" },
+      { letter: "Q", word: "Q for Queen", image: "q.png" },
+      { letter: "R", word: "R for Rabbit", image: "r.png" },
+      { letter: "S", word: "S for Sun", image: "s.png" }, 
+      { letter: "T", word: "T for Tiger", image: "t.png" },
+      { letter: "U", word: "U for Umbrella", image: "u.png" },
+      { letter: "V", word: "V for Victory", image: "v.png" },
+      { letter: "W", word: "W for Women", image: "w.png" },
+      { letter: "X", word: "X for X-ray", image: "x.png" },
+      { letter: "Y", word: "Y for Yak", image: "y.jpg" },
+      { letter: "Z", word: "Z for Zebra", image: "z.png" }
+    ];
+
+    const container = document.getElementById('cardContainer');
+    let currentFlippedCard = null;
+
+    data.forEach(item => {
+      const cardWrapper = document.createElement('div');
+      cardWrapper.className = 'card-wrapper';
+
+      const card = document.createElement('div');
+      card.className = 'card';
+
+      const cardInner = document.createElement('div');
+      cardInner.className = 'card-inner';
+
+      const cardFront = document.createElement('div');
+      cardFront.className = 'card-front';
+      cardFront.textContent = item.letter;
+
+      const cardBack = document.createElement('div');
+      cardBack.className = 'card-back';
+      cardBack.innerHTML = `<img src="${item.image}" alt="${item.word}"> 
+      <p class="card-back-text">${item.word}</p>`;
+
+      cardInner.appendChild(cardFront);
+      cardInner.appendChild(cardBack);
+      card.appendChild(cardInner);
+
+      const speaker = document.createElement('div');
+      speaker.className = 'speaker';
+      speaker.innerHTML = '<img src="speaker.png" alt="Speaker">';
+
+      speaker.addEventListener('click', () => {
+        const utterance = new SpeechSynthesisUtterance(item.word);
+        speechSynthesis.speak(utterance);
+      });
+
+      card.addEventListener('mouseenter', () => {
+        if (currentFlippedCard && currentFlippedCard !== cardInner) {
+          currentFlippedCard.classList.remove('is-flipped');
+        }
+        cardInner.classList.add('is-flipped');
+        currentFlippedCard = cardInner;
+      });
+
+      cardWrapper.appendChild(card);
+      cardWrapper.appendChild(speaker);
+      container.appendChild(cardWrapper);
+    });
+
+    container.addEventListener('mouseleave', () => {
+      if (currentFlippedCard) {
+        currentFlippedCard.classList.remove('is-flipped');
+        currentFlippedCard = null;
+      }
+    });
+  </script>
+</body>
+</html>
